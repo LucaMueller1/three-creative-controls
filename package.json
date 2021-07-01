@@ -1,0 +1,34 @@
+{
+  "version": "1.0.0",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "three": "^0.129.0",
+    "vite": "^2.3.8"
+  },
+  "name": "three-creative-controls",
+  "description": "Three.js noclip camera controls that feel similar to minecraft creative mode",
+  "main": "CreativeControls.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/REIGNjs/three-creative-controls.git"
+  },
+  "keywords": [
+    "three",
+    "creative",
+    "controls",
+    "fly-controls",
+    "three-creative-controls",
+    "minecraft",
+    "reignjs"
+  ],
+  "author": "Luca Mueller",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/REIGNjs/three-creative-controls/issues"
+  },
+  "homepage": "https://github.com/REIGNjs/three-creative-controls#readme"
+}

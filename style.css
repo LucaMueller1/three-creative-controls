@@ -1,0 +1,52 @@
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#blocker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+}
+
+#crosshair {
+  position: fixed;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+}
+
+#crosshairImage {
+  width: 1.5%;
+  opacity: 0.8;
+  object-fit: cover;
+}
+
+#menu {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+body {
+  margin: 0px;
+}
