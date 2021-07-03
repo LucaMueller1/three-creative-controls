@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { Vector3 } from 'three';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 
 export var CreativeControls = CreativeControls || {}
@@ -10,11 +11,8 @@ CreativeControls.moveDown = false;
 CreativeControls.moveLeft = false;
 CreativeControls.moveRight = false;
 
-CreativeControls.Controls = (camera, dom) => {
+CreativeControls.Controls = (camera, dom, menu, blocker) => {
     const controls = new PointerLockControls(camera, dom);
-
-    const blocker = document.getElementById('blocker');
-	const menu = document.getElementById('menu');
 
     menu.addEventListener('click', function () {
         controls.lock();
@@ -96,18 +94,14 @@ CreativeControls.velocity = new THREE.Vector3();
 CreativeControls.direction = new THREE.Vector3();
 CreativeControls.prevTime = performance.now();
 
-CreativeControls.update = (controls, raycaster, scene) => {
+CreativeControls.update = (controls, speed) => {
     const time = performance.now();
 
+    if(!speed) {
+        speed = new Vector3(200.0, 200.0, 200.0);
+    }
+
     if (controls.isLocked === true ) {
-
-        //raycaster.ray.origin.copy(controls.getObject().position);
-        
-
-        //const intersections = raycaster.intersectObjects(scene, true);
-
-        //const onObject = intersections.length > 0;
-
         const delta = (time - CreativeControls.prevTime) / 1000;
 
         
@@ -121,14 +115,9 @@ CreativeControls.update = (controls, raycaster, scene) => {
         CreativeControls.direction.y = Number( CreativeControls.moveDown ) - Number( CreativeControls.moveUp );
         CreativeControls.direction.normalize(); // this ensures consistent movements in all directions
 
-        if ( CreativeControls.moveForward || CreativeControls.moveBackward ) CreativeControls.velocity.z -= CreativeControls.direction.z * 200.0 * delta;
-        if ( CreativeControls.moveLeft || CreativeControls.moveRight ) CreativeControls.velocity.x -= CreativeControls.direction.x * 200.0 * delta;
-        if ( CreativeControls.moveUp || CreativeControls.moveDown ) CreativeControls.velocity.y -= CreativeControls.direction.y * 200.0 * delta;
-
-        /*
-        if (onObject === true) {
-            velocity.y = Math.max( 0, velocity.y );
-        }*/
+        if ( CreativeControls.moveForward || CreativeControls.moveBackward ) CreativeControls.velocity.z -= CreativeControls.direction.z * speed.z * delta;
+        if ( CreativeControls.moveLeft || CreativeControls.moveRight ) CreativeControls.velocity.x -= CreativeControls.direction.x * speed.x * delta;
+        if ( CreativeControls.moveUp || CreativeControls.moveDown ) CreativeControls.velocity.y -= CreativeControls.direction.y * speed.y * delta;
 
         controls.moveRight( - CreativeControls.velocity.x * delta );
         controls.moveForward( - CreativeControls.velocity.z * delta );

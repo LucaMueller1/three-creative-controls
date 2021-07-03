@@ -1,6 +1,7 @@
 import './style.css';
 import * as THREE from "three";
 import { CreativeControls } from "./CreativeControls"
+import { Vector3 } from 'three';
 
 
 const scene = new THREE.Scene();
@@ -20,7 +21,11 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.setZ(30);
 renderer.render(scene, camera);
 
-const creativeControls = CreativeControls.Controls(camera, renderer.domElement);
+const blocker = document.getElementById('blocker');
+const menu = document.getElementById('menu');
+
+const creativeControls = CreativeControls.Controls(camera, renderer.domElement, menu, blocker);
+const creativeControlsSpeed = new Vector3(200, 200, 200);
 
 
 const gridHelper = new THREE.GridHelper(200, 50);
@@ -31,7 +36,7 @@ scene.add(gridHelper);
 const animate = () => {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
-  CreativeControls.update(creativeControls);
+  CreativeControls.update(creativeControls, creativeControlsSpeed);
   
 };
 animate();
